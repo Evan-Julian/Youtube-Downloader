@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Detail Video & Pilih Kualitas</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <link href="https://www.youtube.com/watch?v=VIDEO_ID7" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script>
+      window.onload = function () {
+        const format = "{{ format_type }}";
+        const qualitySection = document.getElementById("quality-section");
+        if (format !== "mp4") {
+          qualitySection.classList.add("hidden");
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="/">YTSave</a>
+      </div>
+      <nav class="format-nav">
+        <a
+          href="/"
+          class="nav-item {% if request.path == '/' %}active{% endif %}"
+          >YouTube Video Downloader</a
+        >
+        <a
+          href="/youtube_shorts"
+          class="nav-item {% if request.path == '/youtube_shorts' %}active{% endif %}"
+          >YouTube Shorts Downloader</a
+        >
+        <a
+          href="/youtube_playlist"
+          class="nav-item {% if request.path == '/youtube_playlist' %}active{% endif %}"
+          >YouTube Playlist Downloader</a
+        >
+      </nav>
+      <div class="theme-toggle"><span>☀</span> <span>☾</span></div>
+    </header>
+
+    <main class="hero-section">
+      <h1>Detail Video</h1>
+
+      <div class="video-display-card">
+        <div class="video-title-wrapper">
+          <h2>{{ title }}</h2>
+        </div>
+
+        <div class="video-thumbnail-wrapper">
+          <img src="{{ thumbnail }}" alt="Thumbnail" />
+        </div>
+      </div>
+
+      <form action="/download" method="post" class="download-options-form">
+        <input type="hidden" name="url" value="{{ url }}" />
+        <input type="hidden" name="format" value="{{ format_type }}" />
+
+        <div id="quality-section" class="quality-select-group">
+          <div class="quality-label-text">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="#6C5CE7"
+              width="20px"
+              height="20px"
+            >
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+            </svg>
+            {% if format_type == 'mp4' %} Choose Video Quality: {% else %}
+            Choose Audio Quality: {% endif %}
+          </div>
+
+          <select name="quality" class="quality-button-select" required>
+            <option value="highest">Highest Quality</option>
+            {% for res in resolutions %}
+            <option value="{{ res }}">{{ res }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <button type="submit" class="download-button-large">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="#FFFFFF"
+            width="20px"
+            height="20px"
+          >
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+          </svg>
+          Download Now
+        </button>
+      </form>
+    </main>
+
+    <footer class="main-footer">
+      <div class="languages">
+        <a href="#">English</a> | <a href="#">Deutsch</a> |
+        <a href="#">Polski</a> | <a href="#">Français</a> |
+        <a href="#">Español</a> | <a href="#">Ελληνικά</a> |
+        <a href="#">Latvian</a> | <a href="#">Lithuanian</a> |
+        <a href="#">Nederlands</a> | <a href="#">繁體中文</a> |
+        <a href="#">Italiano</a> | <a href="#">Svenska</a> |
+        <a href="#">Slovensky</a> | <a href="#">Português</a> |
+        <a href="#">Slovenščina</a> | <a href="#">Русский</a> |
+        <a href="#">Dansk</a> | <a href="#">suomi</a> |
+        <a href="#">български</a> | <a href="#">čeština</a> |
+        <a href="#">Eestlane</a> | <a href="#">Magyar</a> |
+        <a href="#">Română</a> | <a href="#">日本語</a> |
+        <a href="#">한국어</a> | <a href="#">bahasa Indonesia</a>
+      </div>
+      <p>Copyright © 2025 Evan Julian. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

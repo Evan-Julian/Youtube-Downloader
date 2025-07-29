@@ -1,0 +1,1084 @@
+/* Global Style */
+body {
+  font-family: "Montserrat", sans-serif; /* Menggunakan font Montserrat */
+  background-color: #ffffff;
+  color: #010101;
+  text-align: center;
+  padding-top: 100px; /* Sesuaikan nilai ini jika header Anda lebih tinggi */
+  padding-bottom: 60px;
+  margin: 0;
+  line-height: 1.6;
+  box-sizing: border-box; /* Penting: Pastikan padding dan border termasuk dalam total lebar/tinggi */
+}
+
+/* Header Utama */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box; /* Penting untuk width: 100% dengan padding */
+}
+
+.main-header .logo {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.main-header .logo a {
+  text-decoration: none;
+  color: #6c5ce7;
+  transition: color 0.3s ease;
+}
+
+.main-header .logo a:hover {
+  color: #5650c6;
+}
+
+.main-header .format-nav {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.main-header .nav-item {
+  text-decoration: none;
+  color: #060606;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 5px 0;
+}
+
+.main-header .nav-item:hover,
+.main-header .nav-item.active {
+  color: #6c5ce7;
+  border-bottom: 2px solid #6c5ce7;
+}
+
+.main-header .theme-toggle span {
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0 5px;
+  color: #c3c3c3;
+}
+
+/* Judul Utama Halaman (misal: "YouTube Video Downloader") */
+h1 {
+  font-size: 38px;
+  color: #6c5ce7; /* Warna default untuk bagian "YouTube" */
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(108, 92, 231, 0.2);
+  animation: popIn 0.6s ease;
+}
+
+h1 .black-bold {
+  color: #000000; /* Warna hitam */
+  font-weight: bold; /* Membuat teks tebal */
+}
+
+.hero-section {
+  padding: 20px;
+  /* PERBAIKAN UTAMA: Meningkatkan max-width hero-section agar konten dalamnya bisa lebih lebar */
+  max-width: 1100px; /* Sama atau lebih besar dari max-width features-section */
+  margin: 0 auto;
+}
+
+.slogan {
+  color: #030303;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.note {
+  color: #060606;
+  font-size: 14px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.note span {
+  color: #6c5ce7;
+}
+
+/* Form Container (untuk index.html) */
+form {
+  background-color: #ffffff;
+  display: inline-block;
+  padding: 35px 40px;
+  border-radius: 14px;
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease;
+  width: auto;
+  max-width: 100%;
+}
+
+.input-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Input Fields */
+input[type="text"] {
+  padding: 12px;
+  margin: 0;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background-color: #f2f0ff;
+  font-size: 15px;
+  transition: 0.3s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 450px;
+}
+
+/* Button Style (umum) */
+button {
+  padding: 14px 30px;
+  background-color: #6c5ce7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-weight: bold;
+  box-shadow: 0px 4px 12px rgba(108, 92, 231, 0.3);
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+button:hover {
+  background-color: #5650c6;
+  transform: scale(1.05);
+}
+
+.small-btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* Optional Section Titles */
+label {
+  font-weight: bold;
+  color: #6c5ce7; /* Warna default label */
+  display: block;
+  margin-top: 15px;
+}
+
+/* Content Preview Section (jika digunakan) */
+.content-preview {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f7f9fc; /* Background ringan untuk section ini */
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); /* Sedikit shadow */
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  max-width: 350px;
+  flex-shrink: 0;
+}
+
+.card img {
+  border-radius: 8px;
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+}
+
+.card-info {
+  text-align: left;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.card-info h4 {
+  margin: 0 0 5px 0;
+  color: #010101;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-info p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #030303;
+}
+
+/* Description Text Section */
+.description-text {
+  margin-top: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  color: #060606;
+  text-align: center;
+}
+
+.description-text p {
+  max-height: 100px; /* Tinggi awal yang terbatas */
+  overflow: hidden;
+  transition: max-height 0.7s ease-out;
+}
+.description-text p.expanded {
+  max-height: 500px; /* Cukup tinggi untuk menampilkan semua teks */
+}
+
+.read-more {
+  background: none;
+  border: none;
+  color: #6c5ce7;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease,
+    border-radius 0.3s ease;
+}
+
+.read-more:hover {
+  color: #ffffff; /* Warna teks menjadi putih saat hover */
+  background-color: #6c5ce7; /* Warna latar belakang tombol menjadi ungu saat hover */
+  border-radius: 5px; /* Tambahkan sedikit border-radius agar terlihat seperti tombol */
+  padding: 5px 10px; /* Tambahkan padding saat hover agar area lebih jelas */
+}
+
+.arrow-down {
+  /* Menargetkan panah di dalam tombol read-more */
+  font-size: 12px;
+}
+
+/* Key Benefits Section */
+.key-benefits-section {
+  margin-top: 50px; /* Jarak dari form */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px; /* Jarak antar item */
+  padding: 20px;
+  /* Awalnya sembunyikan */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.7s ease-out, opacity 0.7s ease-out,
+    margin-top 0.7s ease-out;
+}
+.key-benefits-section.expanded {
+  max-height: 500px; /* Cukup besar untuk menampilkan semua konten */
+  opacity: 1;
+  margin-top: 50px; /* Pastikan margin muncul saat expanded */
+}
+.key-benefit-item {
+  text-align: center;
+  flex: 1 1 250px; /* Fleksibel, tapi dengan min-width */
+  min-width: 200px;
+  background-color: #ffffff; /* Background putih untuk setiap item */
+  padding: 20px; /* Padding di dalam item */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sedikit shadow */
+}
+.key-benefit-item .icon {
+  font-size: 40px;
+  color: #6c5ce7;
+  margin-bottom: 10px;
+}
+.key-benefit-item h3 {
+  font-size: 18px;
+  color: #010101;
+  margin-bottom: 5px;
+}
+.key-benefit-item p {
+  font-size: 14px;
+  color: #060606;
+}
+
+/* Features Section */
+.features-section {
+  margin-top: 80px;
+  padding: 40px 20px;
+  background-color: transparent; /* PERBAIKAN: Background transparan */
+  border-radius: 0; /* PERBAIKAN: Hapus border-radius */
+  box-shadow: none; /* PERBAIKAN: Hapus shadow */
+  max-width: 1100px; /* PERBAIKAN: Meningkatkan lebar maksimal agar section lebih luas */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-section h2 {
+  font-size: 30px;
+  color: #6c5ce7;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: center; /* Pastikan judul section di tengah */
+}
+
+.features-section h3 {
+  font-size: 24px;
+  color: #010101;
+  margin-bottom: 20px;
+}
+
+.feature-subtitle {
+  font-size: 16px;
+  color: #060606;
+  margin-bottom: 40px;
+  text-align: center; /* Pastikan subtitle section di tengah */
+}
+
+.feature-grid {
+  display: grid;
+  /* Memaksa 3 kolom untuk layar besar, kini dengan ruang yang lebih luas */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  max-width: 100%; /* Memastikan grid mengambil lebar penuh dari features-section yang baru */
+  margin: 0 auto;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Styling untuk ikon gambar baru */
+.feature-icon {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(108, 92, 231, 0.11);
+  border-radius: 50%;
+  padding: 10px;
+  box-sizing: content-box;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  color: #010101;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #060606;
+}
+
+/* History Section */
+.history-section {
+  margin-top: 80px;
+  padding: 40px 20px;
+  background-color: transparent; /* PERBAIKAN: Background transparan */
+  border-radius: 0; /* PERBAIKAN: Hapus border-radius */
+  box-shadow: none; /* PERBAIKAN: Hapus shadow */
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Header untuk judul dan tombol Clear */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px; /* Jarak antara header dan grid */
+  flex-wrap: wrap; /* Agar responsif */
+  gap: 15px; /* Jarak antar elemen saat wrap */
+  padding: 0 10px; /* Sedikit padding horizontal */
+}
+
+.history-header h2 {
+  font-size: 30px;
+  color: #6c5ce7;
+  margin-bottom: 0; /* Hapus margin bawah default h2 */
+  font-weight: bold;
+  text-align: left; /* Judul rata kiri sesuai desain */
+  flex-shrink: 0; /* Jangan menyusut */
+}
+
+/* Gaya untuk tombol Hapus Riwayat */
+.clear-history-btn {
+  padding: 10px 20px;
+  background-color: #6c5ce7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0px 3px 8px rgba(108, 92, 231, 0.3); /* Shadow seperti tombol utama */
+  white-space: nowrap; /* Pastikan teks tidak pecah */
+}
+.clear-history-btn:hover {
+  background-color: #5650c6;
+  transform: translateY(-2px); /* Efek angkat sedikit */
+  box-shadow: 0px 5px 12px rgba(108, 92, 231, 0.4); /* Shadow lebih kuat saat hover */
+}
+
+.history-list {
+  display: grid;
+  /* PERBAIKAN: Mengatur agar 3 kolom di desktop, menyesuaikan minmax */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(280px, 1fr)
+  ); /* Menggunakan 280px min-width untuk 3 kolom */
+  gap: 20px; /* Jarak antar kartu */
+  justify-content: center; /* Untuk menengahkan kartu jika tidak mengisi penuh baris */
+  padding: 0; /* Hapus padding default */
+  margin: 0; /* Hapus margin default */
+}
+
+.history-item {
+  background-color: #ffffff;
+  padding: 15px; /* Padding di dalam kartu */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex; /* Gunakan flex untuk menata konten internal */
+  flex-direction: column; /* Konten internal ditumpuk vertikal */
+  align-items: center; /* Menengahkan konten di dalam kartu (horizontal) */
+  text-align: center; /* Teks di dalam kartu rata tengah */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  overflow: hidden; /* Penting untuk memastikan text-overflow berfungsi */
+  min-height: 220px; /* PERBAIKAN: Tingkatkan tinggi minimum kartu untuk thumbnail yang lebih besar */
+  box-sizing: border-box; /* Pastikan padding termasuk dalam tinggi */
+}
+
+.history-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.history-item img {
+  width: 100%; /* Gambar mengisi lebar kartu */
+  max-width: 250px; /* PERBAIKAN: Batasi lebar maksimal gambar agar tidak terlalu besar */
+  height: 140px; /* PERBAIKAN: Set tinggi tetap untuk mencoba mengisi ruang vertikal */
+  object-fit: cover; /* PERBAIKAN: Memastikan gambar menutupi area, mungkin memotong jika aspek rasio beda */
+  border-radius: 5px;
+  margin-bottom: 10px; /* Jarak antara gambar dan info */
+  flex-shrink: 0; /* Sangat penting: memastikan gambar tidak menyusut */
+}
+
+.history-item-info {
+  flex-grow: 1; /* Memungkinkan info mengambil sisa ruang */
+  min-width: 0; /* Penting untuk flex item dengan overflow: hidden */
+  width: 100%; /* Pastikan info memenuhi lebar item */
+}
+
+.history-item-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  color: #010101;
+  /* Atur overflow untuk 2 baris, kemudian elipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Batasi hingga 2 baris */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Pastikan elipsis muncul */
+  line-height: 1.2; /* Menjaga tinggi baris yang rapi */
+  word-break: break-word; /* Memungkinkan pemotongan kata panjang */
+}
+
+.history-item-info p {
+  margin: 5px 0 0 0;
+  font-size: 12px;
+  color: #060606;
+}
+
+/* Gaya untuk kontrol pagination */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* Jarak antar tombol/nomor halaman */
+  margin-top: 30px; /* Jarak dari daftar riwayat */
+  padding: 0 10px;
+  flex-wrap: wrap; /* Agar responsif */
+}
+
+.pagination-btn {
+  padding: 10px 20px; /* PERBAIKAN: Padding lebih besar */
+  background-color: #6c5ce7;
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* PERBAIKAN: Border-radius lebih besar agar lebih rounded */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold; /* Teks tebal */
+  transition: background-color 0.3s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 3px 8px rgba(108, 92, 231, 0.3); /* PERBAIKAN: Shadow yang lebih menonjol */
+  min-width: 80px; /* PERBAIKAN: Lebar minimum untuk konsistensi */
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #5650c6;
+  transform: translateY(-2px); /* Efek angkat sedikit */
+  box-shadow: 0px 5px 12px rgba(108, 92, 231, 0.4); /* Shadow lebih kuat saat hover */
+}
+.pagination-btn:disabled {
+  background-color: #ebebeb; /* Warna untuk tombol yang dinonaktifkan */
+  color: #c3c3c3; /* Warna teks disabled yang lebih gelap */
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none; /* Hapus efek transform saat disabled */
+}
+
+.page-numbers {
+  display: flex;
+  gap: 5px; /* Jarak antar nomor halaman */
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.page-number {
+  padding: 10px 14px; /* PERBAIKAN: Padding lebih besar untuk membuat kotak lebih menonjol */
+  background-color: #f2f0ff; /* Background nomor halaman */
+  color: #010101;
+  border-radius: 8px; /* PERBAIKAN: Border-radius lebih besar agar sesuai tombol */
+  border: 1px solid #f2f0ff; /* PERBAIKAN: Border yang sama dengan background normal untuk transisi */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.page-number:hover:not(.active) {
+  /* Hanya hover jika tidak aktif */
+  background-color: #ebebeb; /* Background saat hover */
+  border-color: #c3c3c3; /* Border saat hover */
+}
+
+.page-number.active {
+  background-color: #6c5ce7; /* Warna untuk halaman aktif */
+  color: #ffffff;
+  font-weight: bold;
+  border-color: #6c5ce7; /* Border yang cocok dengan background aktif */
+}
+
+.no-history {
+  color: #c3c3c3;
+  font-size: 16px;
+  padding: 20px;
+  text-align: center;
+  grid-column: 1 / -1; /* Agar pesan "belum ada riwayat" menempati semua kolom grid */
+}
+
+/* FAQ Section */
+.faq-section {
+  margin-top: 80px;
+  padding: 40px 20px;
+  background-color: transparent; /* PERUBAHAN: Background transparan */
+  border-radius: 0; /* PERUBAHAN: Hapus border-radius */
+  box-shadow: none; /* PERUBAHAN: Hapus shadow */
+  max-width: 900px; /* Mempertahankan lebar */
+  margin-left: auto;
+  margin-right: auto;
+}
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  gap: 15px; /* Kurangi gap untuk item FAQ */
+  text-align: left;
+}
+.faq-item {
+  background-color: #ffffff;
+  padding: 20px 25px; /* Sesuaikan padding */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sedikit shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.faq-item:hover {
+  transform: translateY(-3px); /* Hover lebih ringan */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+.faq-item h3 {
+  color: #010101; /* Warna teks utama */
+  font-size: 18px; /* Sedikit lebih kecil dari section heading */
+  margin-top: 0;
+  margin-bottom: 0; /* Dikelola oleh gap atau padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600; /* Sedikit lebih tebal */
+}
+.faq-item p.faq-answer {
+  color: #060606;
+  font-size: 15px;
+  margin-top: 10px;
+  display: none; /* Sembunyikan jawaban secara default */
+  padding-top: 10px; /* Padding di atas jawaban */
+  border-top: 1px solid #eee; /* Garis pemisah di atas jawaban */
+}
+.faq-item.active p.faq-answer {
+  display: block; /* Tampilkan jika aktif */
+}
+.faq-item h3::after {
+  content: "+";
+  font-size: 24px;
+  color: #6c5ce7;
+  transition: transform 0.3s ease;
+  font-weight: normal; /* Pastikan panah tidak ikut bold */
+}
+.faq-item.active h3::after {
+  content: "-";
+  transform: rotate(0deg); /* Tidak perlu rotate jika sudah minus */
+}
+
+/* Gaya untuk bagian "How It Works" dan FAQ */
+.section-heading {
+  /* Judul umum untuk section baru */
+  font-size: 30px;
+  color: #6c5ce7;
+  margin-bottom: 20px;
+  font-weight: bold; /* Pastikan ini ada */
+  text-align: center;
+  margin-top: 80px;
+}
+
+/* Footer Style */
+.main-footer {
+  margin-top: 80px;
+  padding: 30px 20px;
+  background-color: #f1effe;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #060606;
+}
+
+.main-footer .languages a {
+  color: #6c5ce7;
+  text-decoration: none;
+  margin: 0 8px;
+  white-space: nowrap;
+}
+
+.main-footer .languages a:hover {
+  text-decoration: underline;
+}
+
+/* Hidden Utility Class */
+.hidden {
+  display: none;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  body {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .main-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 20px; /* Menyesuaikan padding untuk mobile */
+    border-radius: 0; /* Hapus border-radius di mobile jika fixed top */
+  }
+  .main-header .format-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .input-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+  input[type="text"],
+  select,
+  button,
+  .quality-button-select,
+  .download-button-large {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Perbaikan untuk history-item di mobile */
+  .history-list {
+    grid-template-columns: 1fr; /* Satu kolom untuk mobile */
+  }
+  .history-item {
+    max-width: 100%; /* Agar memenuhi lebar kontainer */
+  }
+
+  .how-it-works-grid,
+  .faq-list,
+  .feature-grid {
+    grid-template-columns: 1fr; /* Satu kolom di mobile */
+    padding: 0 10px; /* Tambahkan padding horizontal */
+  }
+  .how-it-works-step,
+  .faq-item {
+    padding: 20px;
+  }
+  .how-it-works-step h3 {
+    justify-content: flex-start; /* Nomor dan teks di kiri */
+  }
+  .key-benefits-section {
+    gap: 15px; /* Kurangi gap di mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+  form {
+    padding: 25px 20px;
+  }
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  .main-header .logo {
+    font-size: 18px;
+  }
+  .main-header .nav-item {
+    font-size: 14px;
+  }
+}
+
+/* --- Gaya Kustom untuk video_info.html (DIPINDAHKAN DARI FILE HTML) --- */
+
+/* Gaya untuk kontainer utama detail video (hanya judul dan thumbnail) */
+.video-display-card {
+  background-color: #ffffff;
+  padding: 35px 40px;
+  border-radius: 14px;
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease;
+  max-width: 600px;
+  margin: 40px auto 20px auto;
+}
+
+.video-title-wrapper {
+  margin-bottom: 20px;
+}
+
+.video-display-card h2 {
+  color: #010101;
+  font-size: 24px;
+  word-wrap: break-word;
+  text-align: center;
+  margin: 0;
+}
+
+.video-thumbnail-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 0;
+}
+
+.video-thumbnail-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gaya untuk form pilihan download yang terpisah */
+.download-options-form {
+  background-color: #ffffff;
+  padding: 20px 40px;
+  border-radius: 14px;
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.quality-select-group {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.quality-label-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #010101;
+  font-weight: normal;
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.quality-label-text svg {
+  fill: #6c5ce7;
+}
+
+/* Gaya untuk select agar terlihat seperti tombol */
+select:not(.quality-button-select) {
+  /* Menargetkan select di index.html */
+  width: auto;
+  min-width: 80px;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background-color: #f2f0ff;
+  font-size: 15px;
+  color: #010101;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236C5CE7'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E"); /* Panah ke bawah */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 40px; /* Memberi ruang untuk panah */
+  text-indent: 0;
+}
+
+/* Gaya untuk select kualitas di video_info.html (tombol) */
+.quality-button-select {
+  width: 90%;
+  max-width: 350px;
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid #ebebeb;
+  background-color: #f2f0ff;
+  font-size: 18px;
+  color: #010101;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  position: relative;
+  padding-left: 50px;
+  padding-right: 20px;
+  text-indent: 0;
+}
+
+.quality-button-select:hover {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 5px rgba(108, 92, 231, 0.2);
+}
+
+.quality-button-select option {
+  color: #010101;
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* Pseudo-element untuk panah ke atas di dalam select */
+.quality-button-select::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236C5CE7'%3E%3Cpath d='M7 14l5-5 5 5z' transform='rotate(180 12 12)'/%3E%3C/svg%3E"); /* Panah ke atas */
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  z-index: 1;
+}
+
+/* Gaya untuk tombol download besar */
+.download-button-large {
+  width: 90%;
+  max-width: 350px;
+  font-size: 18px;
+  padding: 16px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0px 4px 12px rgba(108, 92, 231, 0.4);
+  background-color: #6c5ce7;
+  color: #ffffff;
+  margin-top: 15px;
+}
+
+.download-button-large svg {
+  fill: #ffffff;
+}
+
+/* --- Gaya Kustom untuk Download Status (progress bar) --- */
+.progress-container {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.progress-container h2 {
+  color: #6c5ce7;
+  font-size: 24px;
+}
+.progress-bar {
+  width: 90%;
+  height: 25px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  background-color: #6c5ce7;
+  width: 0%;
+  border-radius: 12px;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Teks % di dalam bar berwarna putih */
+  font-weight: bold;
+  font-size: 14px;
+}
+.progress-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  color: #333; /* Teks % di luar bar berwarna gelap */
+  font-weight: bold;
+  line-height: 25px;
+}
+.status-message {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #010101;
+}
+.error-message {
+  color: #ff0000;
+  font-weight: bold;
+}
+.download-link {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #6c5ce7;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.download-link:hover {
+  background-color: #5650c6;
+}
+
+/* Footer Style */
+.main-footer {
+  margin-top: 80px;
+  padding: 40px 25px; /* PERBAIKAN: Padding ditingkatkan untuk lebih banyak ruang */
+  background-color: #f1effe;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #060606;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03); /* PERBAIKAN: Sedikit shadow di atas untuk memisahkan */
+}
+
+.main-footer .languages {
+  margin-bottom: 15px; /* PERBAIKAN: Jarak antara daftar bahasa dan teks copyright */
+  display: flex; /* Memastikan tata letak fleksibel */
+  flex-wrap: wrap; /* Agar bahasa bisa wrap di layar kecil */
+  justify-content: center; /* Menengahkan link bahasa */
+  gap: 10px; /* PERBAIKAN: Menambahkan gap antar link */
+}
+
+.main-footer .languages a {
+  color: #6c5ce7;
+  text-decoration: none;
+  /* Hapus margin 0 8px karena sudah ada gap */
+  white-space: nowrap;
+  font-weight: 500; /* Sedikit lebih tebal */
+  padding: 2px 5px; /* Sedikit padding agar area hover lebih jelas */
+  border-radius: 3px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transisi untuk hover */
+}
+
+.main-footer .languages a:hover {
+  text-decoration: none; /* Hapus underline saat hover jika background berubah */
+  background-color: rgba(
+    108,
+    92,
+    231,
+    0.1
+  ); /* PERBAIKAN: Background ringan saat hover */
+  color: #5650c6; /* PERBAIKAN: Sedikit perubahan warna teks */
+}

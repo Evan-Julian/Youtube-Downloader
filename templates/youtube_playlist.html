@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>YTSave - YouTube Playlist Downloader</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <link href="https://www.youtube.com/watch?v=VIDEO_ID7" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+      /* Gaya spesifik untuk halaman playlist */
+      .playlist-form-container {
+        background-color: #ffffff;
+        display: inline-block;
+        padding: 35px 40px;
+        border-radius: 14px;
+        box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.8s ease;
+        width: auto;
+        max-width: 100%;
+        margin-top: 40px; /* Jarak dari judul utama */
+      }
+      .playlist-form-container .input-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .playlist-form-container input[type="text"] {
+        flex-grow: 1;
+        max-width: 450px;
+      }
+      /* Sesuaikan gaya tombol jika perlu untuk form playlist */
+      .playlist-form-container button {
+        padding: 14px 30px;
+        font-size: 16px;
+      }
+    </style>
+    <script>
+      // JavaScript untuk halaman Playlist
+      window.onload = function () {
+        document
+          .getElementById("playlist-download-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = "/download_playlist"; // Rute untuk playlist download
+
+            const urlInput = document.createElement("input");
+            urlInput.type = "hidden";
+            urlInput.name = "url";
+            urlInput.value = document.getElementById("playlist-url").value;
+            form.appendChild(urlInput);
+
+            document.body.appendChild(form);
+            form.submit();
+          });
+      };
+    </script>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="/">YTSave</a>
+      </div>
+      <nav class="format-nav">
+        <a
+          href="/"
+          class="nav-item {% if request.path == '/' %}active{% endif %}"
+          >YouTube Video Downloader</a
+        >
+        <a
+          href="/youtube_shorts"
+          class="nav-item {% if request.path == '/youtube_shorts' %}active{% endif %}"
+          >YouTube Shorts Downloader</a
+        >
+        <a
+          href="/youtube_playlist"
+          class="nav-item {% if request.path == '/youtube_playlist' %}active{% endif %}"
+          >YouTube Playlist Downloader</a
+        >
+      </nav>
+      <div class="theme-toggle"><span>☀</span> <span>☾</span></div>
+    </header>
+
+    <main class="hero-section">
+      <h1>YouTube <span class="black-bold">Playlist Downloader</span></h1>
+      <p class="slogan">Download entire YouTube playlists with ease.</p>
+      <p class="note">
+        <span style="color: #6c5ce7">⚠</span> Note: We do not allow/support the
+        download of copyrighted material!
+      </p>
+
+      <form
+        id="playlist-download-form"
+        class="playlist-form-container"
+        method="post"
+      >
+        <div class="input-group">
+          <input
+            type="text"
+            name="url"
+            id="playlist-url"
+            placeholder="Enter YouTube Playlist URL"
+            required
+          />
+          <button type="submit">Download Playlist</button>
+        </div>
+      </form>
+    </main>
+
+    <footer class="main-footer">
+      <div class="languages">
+        <a href="#">English</a> | <a href="#">Deutsch</a> |
+        <a href="#">Polski</a> | <a href="#">Français</a> |
+        <a href="#">Español</a> | <a href="#">Ελληνικά</a> |
+        <a href="#">Latvian</a> | <a href="#">Lithuanian</a> |
+        <a href="#">Nederlands</a> | <a href="#">繁體中文</a> |
+        <a href="#">Italiano</a> | <a href="#">Svenska</a> |
+        <a href="#">Slovensky</a> | <a href="#">Português</a> |
+        <a href="#">Slovenščina</a> | <a href="#">Русский</a> |
+        <a href="#">Dansk</a> | <a href="#">suomi</a> |
+        <a href="#">български</a> | <a href="#">čeština</a> |
+        <a href="#">Eestlane</a> | <a href="#">Magyar</a> |
+        <a href="#">Română</a> | <a href="#">日本語</a> |
+        <a href="#">한국어</a> | <a href="#">bahasa Indonesia</a>
+      </div>
+      <p>Copyright © 2025 Evan Julian. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

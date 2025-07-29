@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Terjadi Kesalahan</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <link href="https://www.youtube.com/watch?v=VIDEO_ID7" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="/">YTSave</a>
+      </div>
+      <nav class="format-nav">
+        <a
+          href="/"
+          class="nav-item {% if request.path == '/' %}active{% endif %}"
+          >YouTube Video Downloader</a
+        >
+        <a
+          href="/youtube_shorts"
+          class="nav-item {% if request.path == '/youtube_shorts' %}active{% endif %}"
+          >YouTube Shorts Downloader</a
+        >
+        <a
+          href="/youtube_playlist"
+          class="nav-item {% if request.path == '/youtube_playlist' %}active{% endif %}"
+          >YouTube Playlist Downloader</a
+        >
+      </nav>
+      <div class="theme-toggle"><span>☀</span> <span>☾</span></div>
+    </header>
+
+    <main class="hero-section">
+      <h1>Terjadi Kesalahan!</h1>
+      <p
+        style="
+          color: #ff0000;
+          font-size: 18px;
+          max-width: 600px;
+          margin: 20px auto;
+        "
+      >
+        {{ message | safe }}
+      </p>
+      <p>
+        <a href="/" class="download-link" style="margin-top: 30px"
+          >Kembali ke Halaman Utama</a
+        >
+      </p>
+    </main>
+
+    <footer class="main-footer">
+      <div class="languages">
+        <a href="#">English</a> | <a href="#">Deutsch</a> |
+        <a href="#">Polski</a> | <a href="#">Français</a> |
+        <a href="#">Español</a> | <a href="#">Ελληνικά</a> |
+        <a href="#">Latvian</a> | <a href="#">Lithuanian</a> |
+        <a href="#">Nederlands</a> | <a href="#">繁體中文</a> |
+        <a href="#">Italiano</a> | <a href="#">Svenska</a> |
+        <a href="#">Slovensky</a> | <a href="#">Português</a> |
+        <a href="#">Slovenščina</a> | <a href="#">Русский</a> |
+        <a href="#">Dansk</a> | <a href="#">suomi</a> |
+        <a href="#">български</a> | <a href="#">čeština</a> |
+        <a href="#">Eestlane</a> | <a href="#">Magyar</a> |
+        <a href="#">Română</a> | <a href="#">日本語</a> |
+        <a href="#">한국어</a> | <a href="#">bahasa Indonesia</a>
+      </div>
+      <p>Copyright © 2025 Evan Julian. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>

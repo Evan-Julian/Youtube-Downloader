@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Progres Unduhan</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+      type="image/x-icon"
+    />
+    <link href="https://www.youtube.com/watch?v=VIDEO_ID7" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+      /* Gaya khusus untuk halaman progres */
+      .progress-container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 14px;
+        box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 50px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+      .progress-container h2 {
+        color: #6c5ce7;
+        font-size: 24px;
+      }
+      .progress-bar {
+        width: 90%;
+        height: 25px;
+        background-color: #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+      }
+      .progress-fill {
+        height: 100%;
+        background-color: #6c5ce7;
+        width: 0%;
+        border-radius: 12px;
+        transition: width 0.3s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .progress-text {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        color: #333;
+        font-weight: bold;
+        line-height: 25px;
+      }
+      .status-message {
+        margin-top: 15px;
+        font-size: 16px;
+        color: #010101;
+      }
+      .error-message {
+        color: #ff0000;
+        font-weight: bold;
+      }
+      .download-link {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background-color: #6c5ce7;
+        color: #fff;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+      .download-link:hover {
+        background-color: #5650c6;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hero-section">
+      <div class="progress-container">
+        <h2>Progres Unduhan</h2>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+          <span class="progress-text" id="progress-text">0%</span>
+        </div>
+        <p class="status-message" id="status-message">Memulai unduhan...</p>
+        <a href="#" id="download-now-link" class="download-link hidden"
+          >Unduh Sekarang</a
+        >
+        <a href="/" class="download-link">Kembali ke Halaman Utama</a>
+      </div>
+    </main>
+
+    <footer class="main-footer">
+      <div class="languages">
+        <a href="#">English</a> | <a href="#">Deutsch</a> |
+        <a href="#">Polski</a> | <a href="#">Français</a> |
+        <a href="#">Español</a> | <a href="#">Ελληνικά</a> |
+        <a href="#">Latvian</a> | <a href="#">Lithuanian</a> |
+        <a href="#">Nederlands</a> | <a href="#">繁體中文</a> |
+        <a href="#">Italiano</a> | <a href="#">Svenska</a> |
+        <a href="#">Slovensky</a> | <a href="#">Português</a> |
+        <a href="#">Slovenščina</a> | <a href="#">Русский</a> |
+        <a href="#">Dansk</a> | <a href="#">suomi</a> |
+        <a href="#">български</a> | <a href="#">čeština</a> |
+        <a href="#">Eestlane</a> | <a href="#">Magyar</a> |
+        <a href="#">Română</a> | <a href="#">日本語</a> |
+        <a href="#">한국어</a> | <a href="#">bahasa Indonesia</a>
+      </div>
+      <p>Copyright © 2025 Evan Julian. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      const downloadId = "{{ download_id }}";
+      const progressFill = document.getElementById("progress-fill");
+      const progressText = document.getElementById("progress-text");
+      const statusMessage = document.getElementById("status-message");
+      const downloadNowLink = document.getElementById("download-now-link");
+      let pollInterval;
+
+      // Fungsi untuk menyimpan riwayat unduhan
+      function saveDownloadHistory(videoInfo) {
+        let history = JSON.parse(
+          localStorage.getItem("downloadHistory") || "[]"
+        );
+        // Pastikan tidak ada duplikat berdasarkan URL
+        const isDuplicate = history.some((item) => item.url === videoInfo.url);
+        if (!isDuplicate) {
+          // Batasi jumlah riwayat, misalnya 10 item terbaru
+          if (history.length >= 10) {
+            history.shift(); // Hapus item terlama
+          }
+          history.push(videoInfo);
+          localStorage.setItem("downloadHistory", JSON.stringify(history));
+          console.log("Riwayat unduhan disimpan:", videoInfo); // Log untuk debugging
+        } else {
+          console.log("Video sudah ada di riwayat, tidak disimpan lagi.");
+        }
+      }
+
+      function checkProgress() {
+        fetch(`/progress/${downloadId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            progressFill.style.width = `${data.progress}%`;
+            progressText.textContent = `${Math.round(data.progress)}%`;
+
+            if (data.status === "downloading") {
+              statusMessage.textContent = "Sedang mengunduh...";
+            } else if (data.status === "complete") {
+              clearInterval(pollInterval);
+              progressText.textContent = "100%";
+              statusMessage.textContent = "Unduhan selesai!";
+              downloadNowLink.href = `/serve_download/${downloadId}`;
+              downloadNowLink.classList.remove("hidden");
+
+              // Cek apakah data yang dibutuhkan untuk riwayat ada
+              if (data.title && data.thumbnail && data.original_url) {
+                const historyItem = {
+                  title: data.title,
+                  thumbnail: data.thumbnail,
+                  url: data.original_url,
+                  downloadedAt: new Date().toISOString(),
+                };
+                saveDownloadHistory(historyItem);
+              } else {
+                console.warn(
+                  "Informasi video tidak lengkap untuk disimpan ke riwayat. Data yang diterima:",
+                  data
+                );
+              }
+            } else if (data.status === "error") {
+              clearInterval(pollInterval);
+              statusMessage.classList.add("error-message");
+              statusMessage.textContent = `Error: ${
+                data.message || "Terjadi kesalahan."
+              }`;
+              downloadNowLink.classList.add("hidden");
+            }
+          })
+          .catch((error) => {
+            clearInterval(pollInterval);
+            console.error("Error fetching progress:", error);
+            statusMessage.classList.add("error-message");
+            statusMessage.textContent =
+              "Terjadi kesalahan saat memeriksa progres.";
+            downloadNowLink.classList.add("hidden");
+          });
+      }
+
+      pollInterval = setInterval(checkProgress, 1000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>YTSave - YouTube Video Downloader</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link href="https://www.youtube.com/watch?v=VIDEO_ID7" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <script>
+      // Variabel Global untuk Pagination
+      let currentPage = 1;
+      const itemsPerPage = 6; // Sesuaikan jumlah item per halaman
+      let totalPages = 0;
+      let downloadHistoryData = []; // Akan menyimpan seluruh data riwayat
+
+      // Fungsi untuk menampilkan riwayat unduhan (dengan pagination)
+      function displayDownloadHistory() {
+          const historyListDiv = document.getElementById('history-list');
+          const pageNumbersDiv = document.getElementById('page-numbers');
+          const prevPageBtn = document.getElementById('prev-page-btn');
+          const nextPageBtn = document.getElementById('next-page-btn');
+
+          downloadHistoryData = JSON.parse(localStorage.getItem('downloadHistory') || '[]');
+          downloadHistoryData.sort((a, b) => new Date(b.downloadedAt) - new Date(a.downloadedAt));
+
+          totalPages = Math.ceil(downloadHistoryData.length / itemsPerPage);
+
+          historyListDiv.innerHTML = ''; // Kosongkan daftar sebelum mengisi ulang
+          pageNumbersDiv.innerHTML = ''; // Kosongkan nomor halaman
+
+          if (downloadHistoryData.length === 0) {
+              historyListDiv.innerHTML = '<p class="no-history">Belum ada riwayat unduhan.</p>';
+              document.getElementById('clear-history-btn').classList.add('hidden');
+              // Sembunyikan kontrol pagination jika tidak ada riwayat
+              if (prevPageBtn) prevPageBtn.classList.add('hidden');
+              if (nextPageBtn) nextPageBtn.classList.add('hidden');
+              return;
+          }
+
+          document.getElementById('clear-history-btn').classList.remove('hidden');
+
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+          const itemsToDisplay = downloadHistoryData.slice(startIndex, endIndex);
+
+          itemsToDisplay.forEach(item => {
+              const itemDiv = document.createElement('div');
+              itemDiv.classList.add('history-item');
+              itemDiv.innerHTML = `
+                  <img src="${item.thumbnail}" alt="${item.title}" />
+                  <div class="history-item-info">
+                      <h4>${item.title}</h4>
+                      <p>${new Date(item.downloadedAt).toLocaleDateString()}</p>
+                  </div>
+              `;
+              itemDiv.onclick = () => window.open(item.url, '_blank');
+              itemDiv.style.cursor = 'pointer';
+
+              historyListDiv.appendChild(itemDiv);
+          });
+
+          // Buat nomor halaman
+          for (let i = 1; i <= totalPages; i++) {
+              const pageSpan = document.createElement('span');
+              pageSpan.classList.add('page-number');
+              if (i === currentPage) {
+                  pageSpan.classList.add('active');
+              }
+              pageSpan.textContent = i;
+              pageSpan.addEventListener('click', () => {
+                  currentPage = i;
+                  displayDownloadHistory(); // Muat ulang halaman
+              });
+              pageNumbersDiv.appendChild(pageSpan);
+          }
+
+          // Atur status tombol Prev/Next
+          if (prevPageBtn) prevPageBtn.classList.remove('hidden');
+          if (nextPageBtn) nextPageBtn.classList.remove('hidden');
+          if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+          if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPages;
+
+          console.log("Riwayat unduhan dimuat:", downloadHistoryData);
+        }
+
+      window.onload = function () {
+        document
+          .getElementById("download-form")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const form = document.createElement("form");
+            form.method = "POST";
+            form.action = "/video_info";
+
+            const urlInput = document.createElement("input");
+            urlInput.type = "hidden";
+            urlInput.name = "url";
+            urlInput.value = document.getElementById("url").value;
+            form.appendChild(urlInput);
+
+            const formatInput = document.createElement("input");
+            formatInput.type = "hidden";
+            formatInput.name = "format";
+            formatInput.value = document.getElementById("format").value;
+            form.appendChild(formatInput);
+
+            document.body.appendChild(form);
+            form.submit();
+          });
+        
+        // Panggil fungsi untuk menampilkan riwayat saat halaman dimuat
+        displayDownloadHistory();
+
+        // Event listener untuk tombol clear history
+        const clearHistoryBtn = document.getElementById('clear-history-btn');
+        if (clearHistoryBtn) { // Pastikan tombol ada sebelum menambahkan event listener
+            clearHistoryBtn.addEventListener('click', function() {
+                if (confirm('Apakah Anda yakin ingin menghapus semua riwayat unduhan?')) {
+                    localStorage.removeItem('downloadHistory');
+                    currentPage = 1; // Reset halaman ke 1 setelah menghapus
+                    displayDownloadHistory(); // Muat ulang tampilan riwayat
+                }
+            });
+        }
+
+
+        // Event listener untuk tombol Prev/Next pagination
+        const prevPageBtn = document.getElementById('prev-page-btn');
+        const nextPageBtn = document.getElementById('next-page-btn');
+
+        if (prevPageBtn) {
+            prevPageBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    displayDownloadHistory();
+                }
+            });
+        }
+        if (nextPageBtn) {
+            nextPageBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    displayDownloadHistory();
+                }
+            });
+        }
+
+
+        // JavaScript untuk FAQ (Accordion)
+        const faqItems = document.querySelectorAll('.faq-item h3');
+        faqItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentNode;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // JavaScript untuk "See More" / Deskripsi & Key Benefits
+        const readMoreBtn = document.getElementById('read-more-btn');
+        const descriptionText = document.getElementById('description-full-text');
+        const keyBenefitsSection = document.getElementById('key-benefits-section');
+        // Pastikan elemen ada sebelum menambahkan event listener
+        if (readMoreBtn && descriptionText && keyBenefitsSection) {
+            const arrowSpan = readMoreBtn.querySelector('.arrow-down');
+
+            readMoreBtn.addEventListener('click', function() {
+                const isExpanded = descriptionText.classList.toggle('expanded');
+                keyBenefitsSection.classList.toggle('expanded');
+
+                if (isExpanded) {
+                    arrowSpan.innerHTML = '▲'; // Panah ke atas
+                    readMoreBtn.innerHTML = 'See less <span class="arrow-down">▲</span>';
+                } else {
+                    arrowSpan.innerHTML = '▼'; // Panah ke bawah
+                    readMoreBtn.innerHTML = 'See more <span class="arrow-down">▼</span>';
+                }
+            });
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="/">YTSave</a>
+      </div>
+      <nav class="format-nav">
+        <a href="/" class="nav-item {% if request.path == '/' %}active{% endif %}">YouTube Video Downloader</a>
+        <a href="/youtube_shorts" class="nav-item {% if request.path == '/youtube_shorts' %}active{% endif %}">YouTube Shorts Downloader</a>
+        <a href="/youtube_playlist" class="nav-item {% if request.path == '/youtube_playlist' %}active{% endif %}">YouTube Playlist Downloader</a>
+      </nav>
+      <div class="theme-toggle">
+        <span>☀</span> <span>☾</span> </div>
+    </header>
+
+<main class="hero-section">
+      <h1>YouTube <span class="black-bold">Video Downloader</span></h1> <p class="slogan">
+        Try this unique tool for quick, hassle-free downloads from YouTube.
+      </p>
+      <p class="note">
+        <span style="color: #6c5ce7">⚠</span> Note: We do not allow/support the download of copyrighted material!
+      </p>
+
+      <form id="download-form" action="/video_info" method="post">
+        <div class="input-group">
+          <select name="format" id="format">
+            <option value="mp4">MP4</option>
+            <option value="mp3">MP3</option>
+          </select>
+          <input
+            type="text"
+            name="url"
+            id="url"
+            placeholder="Enter YouTube Video URL"
+            required
+          />
+          <button type="submit">Download</button>
+        </div>
+      </form>
+
+ <section class="description-text">
+        <p id="description-full-text">
+          The YouTube Video Downloader promises uninterrupted entertainment and
+          a buffer-free experience for your favorite YouTube content. This
+          user-friendly tool helps you to download videos effortlessly,
+          eliminating the frustration of buffering. With a simple interface,
+          the downloader makes video downloads a breeze. One of the key
+          features of this tool is its versatility. You get to choose from a
+          variety of quality options to convert your downloads according to
+          your preferences. Users can watch videos in high resolution without
+          worrying about buffering disruptions.
+          <br><br>
+          Our commitment ensures that every download runs quickly and efficiently,
+          allowing you to enjoy your favorite content offline at any time.
+          With support for various formats, including MP4 for high-quality video
+          and MP3 for audio only, you have full control over how you want to
+          save your media. Our interface is designed for ease of use,
+          ensuring even new users can download videos in just a few clicks.
+          We also pride ourselves on our commitment to user security and privacy,
+          providing a safe and worry-free downloading environment.
+          Download now and experience limitless entertainment!
+        </p>
+        <button id="read-more-btn" class="read-more">
+          See more <span class="arrow-down">▼</span>
+        </button>
+      </section>
+
+      <section id="key-benefits-section" class="key-benefits-section">
+          <div class="key-benefit-item">
+              <span class="icon">⚡</span>
+              <h3>Blazing Fast Downloads</h3>
+              <p>Experience rapid download speeds powered by optimized servers.</p>
+          </div>
+          <div class="key-benefit-item">
+              <span class="icon">✨</span>
+              <h3>High Quality Output</h3>
+              <p>Get your videos in the best possible resolution, including 1080p and 4K.</p>
+          </div>
+          <div class="key-benefit-item">
+              <span class="icon">🆓</span>
+              <h3>Completely Free</h3>
+              <p>Enjoy all features without any hidden costs or subscriptions.</p>
+          </div>
+          <div class="key-benefit-item">
+              <span class="icon">🔒</span>
+              <h3>Safe & Secure</h3>
+              <p>Your privacy is our priority. Download content safely and anonymously.</p>
+          </div>
+      </section>
+
+  <section class="features-section">
+  <h2>Features</h2>
+  <h3>What Makes Us Special</h3>
+  <p class="feature-subtitle">Discover the unique advantages that make our YouTube Video Downloader stand out.</p>
+
+  <div class="feature-grid">
+  <div class="feature-card">
+    <img src="{{ url_for('static', filename='icons/icon 1.png') }}" alt="No Download Limit Icon" class="feature-icon">
+    <h3>No Download Limit</h3>
+    <p>
+      Enjoy the freedom of downloading YouTube videos without any quantity limitations. Download as much as you want, whenever you need it, without hindrance.
+    </p>
+  </div>
+  <div class="feature-card">
+    <img src="{{ url_for('static', filename='icons/icon 2.png') }}" alt="Downloads At No Cost Icon" class="feature-icon">
+    <h3>Downloads At No Cost</h3>
+    <p>
+      Get your favorite videos and audio from YouTube completely free of charge. Our service is free for all users, forever.
+    </p>
+  </div>
+  <div class="feature-card">
+    <img src="{{ url_for('static', filename='icons/icon 3.png') }}" alt="The Best Speeds Icon" class="feature-icon">
+    <h3>The Best Speeds</h3>
+    <p>
+      Experience super-fast download speeds that allow you to get videos in seconds, supported by an optimized server infrastructure.
+    </p>
+  </div>
+  <div class="feature-card">
+    <img src="{{ url_for('static', filename='icons/icon 6.png') }}" alt="Easy to Use Icon" class="feature-icon">
+    <h3>Easy to Use</h3>
+    <p>
+      Our intuitive and simple interface allows anyone to download videos in just a few clicks, even without technical experience.
+    </p>
+  </div>
+  <div class="feature-card">
+    <img src="{{ url_for('static', filename='icons/icon 5.png') }}" alt="No Need For Apps Icon" class="feature-icon">
+    <h3>No Need For Apps</h3>
+    <p>
+      Download videos directly from your browser without needing to install additional software or extensions. Access anytime, anywhere.
+    </p>
+  </div>
+  <div class="feature-card">
+    <img src="{{ url_for('static', filename='icons/icon 4.png') }}" alt="Well Secured Icon" class="feature-icon">
+    <h3>Well Secured</h3>
+    <p>
+      Your privacy and security are our top priorities. Our site is safe and free from malware, ensuring a protected downloading experience.
+    </p>
+  </div>
+</div>
+</section>
+
+      <section class="history-section">
+          <div class="history-header"> <h2>Download History</h2>
+              <button id="clear-history-btn" class="clear-history-btn">Clear History</button>
+          </div>
+          <div id="history-list" class="history-list">
+              </div>
+          <div class="pagination-controls"> <button id="prev-page-btn" class="pagination-btn hidden">&lt; Previous</button>
+              <div id="page-numbers" class="page-numbers">
+                  </div>
+              <button id="next-page-btn" class="pagination-btn hidden">Next &gt;</button>
+          </div>
+      </section>
+
+       <section class="faq-section">
+          <h2 class="section-heading">Frequently Asked Questions</h2>
+          <div class="faq-list">
+              <div class="faq-item">
+                  <h3>How do I download a video?</h3>
+                  <p class="faq-answer">Simply paste the YouTube video URL into the input field, select your desired format and quality, then click the "Download" button. The process is quick and easy.</p>
+              </div>
+              <div class="faq-item">
+                  <h3>Is it free to use?</h3>
+                  <p class="faq-answer">Yes, our YouTube Video Downloader is completely free to use for all users, with no hidden fees or subscriptions required.</p>
+              </div>
+              <div class="faq-item">
+                  <h3>What video quality options are available?</h3>
+                  <p class="faq-answer">We offer various quality options up to the highest available resolution for progressive streams (video + audio), including 1080p and 720p through merging separate streams.</p>
+              </div>
+              <div class="faq-item">
+                  <h3>Can I download audio only?</h3>
+                  <p class="faq-answer">Absolutely! You can choose the MP3 format to download only the audio track from any YouTube video.</p>
+              </div>
+              <div class="faq-item">
+                  <h3>Is downloading copyrighted content allowed?</h3>
+                  <p class="faq-answer">No, we strictly do not support or allow the download of copyrighted material. Our tool is intended for personal use of non-copyrighted or public domain content only.</p>
+              </div>
+          </div>
+      </section>
+
+      <footer class="main-footer">
+        <div class="languages">
+          <a href="#">English</a> | <a href="#">Deutsch</a> | <a href="#">Polski</a> | <a href="#">Français</a> | <a href="#">Español</a> | <a href="#">Ελληνικά</a> | <a href="#">Latvian</a> | <a href="#">Lithuanian</a> | <a href="#">Nederlands</a> | <a href="#">繁體中文</a> | <a href="#">Italiano</a> | <a href="#">Svenska</a> | <a href="#">Slovensky</a> | <a href="#">Português</a> | <a href="#">Slovenščina</a> | <a href="#">Русский</a> | <a href="#">Dansk</a> | <a href="#">suomi</a> | <a href="#">български</a> | <a href="#">čeština</a> | <a href="#">Eestlane</a> | <a href="#">Magyar</a> | <a href="#">Română</a> | <a href="#">日本語</a> | <a href="#">한국어</a> | <a href="#">bahasa Indonesia</a>
+        </div>
+        <p>Copyright © 2025 Evan Julian. All Rights Reserved.</p> </footer>
+      </footer>
+
+    </main>
+  </body>
+</html>
