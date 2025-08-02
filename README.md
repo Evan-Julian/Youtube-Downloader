@@ -13,7 +13,7 @@ Welcome to my **YouTube Downloader** project! This web-based application allows 
 
 ## 📸 Screenshot
 
-![YouTube Downloader Homepage](Homepage.jpg)
+![YouTube Downloader Homepage](Fullpage.png)
 
 > *(Note: Due to browser security or hosting limitations, actual downloading may require running locally.)*
 
