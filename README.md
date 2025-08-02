@@ -56,6 +56,6 @@ Make sure you have Python installed, then install Flask and pytube:**:
    ```bash
    python app.py
 
-5. **Open in your browser:
+5. **Open in your browser**:
 Navigate to http://127.0.0.1:5000/ in your browser and start downloading!
 
