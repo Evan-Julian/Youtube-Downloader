@@ -15,11 +15,6 @@ Welcome to my **YouTube Downloader** project! This web-based application allows 
 
 ![YouTube Downloader Homepage](Homepage.jpg)
 
-## 🚀 Live Demo
-
-Check out the live demo here:  
-👉 [https://evan-julian.github.io/Youtube-Downloader](https://evan-julian.github.io/Youtube-Downloader)
-
 > *(Note: Due to browser security or hosting limitations, actual downloading may require running locally.)*
 
 ## 🛠️ Tech Stack
@@ -58,4 +53,10 @@ Make sure you have Python installed, then install Flask and pytube:**:
 
 5. **Open in your browser**:
 Navigate to http://127.0.0.1:5000/ in your browser and start downloading!
+
+## Contact
+
+- Email: evanpriyasa.id@gmail.com
+- LinkedIn: https://www.linkedin.com/in/evan-julian-8aa5a2292/
+- GitHub: [Evan-Julian](https://github.com/Evan-Julian)
 
